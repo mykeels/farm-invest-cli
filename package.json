@@ -1,0 +1,22 @@
+{
+  "name": "farm-invest-cli",
+  "version": "1.0.0",
+  "description": "Are there new investment opportunities on FarmCrowdy, ThriveAgric or EFarms?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "commander": "^2.18.0"
+  },
+  "keywords": [
+    "FarmCrowdy",
+    "ThriveAgric",
+    "EFarms",
+    "Investment"
+  ],
+  "author": "mykeels",
+  "license": "MIT"
+}
