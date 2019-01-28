@@ -29,9 +29,7 @@ npm install
 npm link
 ```
 
-## Usage
-
-Run
+## Usage as a CLI tool
 
 ```sh
 farm-invest-cli
@@ -45,3 +43,29 @@ You'll get an output like:
 ![farm-invest-cli output](https://user-images.githubusercontent.com/11996508/51835933-238da100-22ff-11e9-8dfc-1086b0db4d52.png)
 
 Where the green text shows new products, and text is only shown when there is a difference between the products currently existing and the last time it checked.
+
+## Usage in Node environment
+
+```js
+const { syncAll } = require('farm-invest-cli')
+
+syncAll().then(diff => {
+    console.log(diff.toString()) // a diff description
+})
+```
+
+```js
+const { getEFarms, getFarmCrowdy, getThriveAgric } = require('farm-invest-cli')
+
+getEFarms().then(productListText => {
+    console.log(productListText) // a textual description of active products on eFarms
+})
+
+getFarmCrowdy().then(productListText => {
+    console.log(productListText) // a textual description of active products on Farm-Crowdy
+})
+
+getThriveAgric().then(productListText => {
+    console.log(productListText) // a textual description of active products on Thrive-Agric
+})
+```
