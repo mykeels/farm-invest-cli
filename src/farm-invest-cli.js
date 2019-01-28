@@ -3,12 +3,13 @@
 const getEFarms = require('./sites/efarms')
 const getFarmCrowdy = require('./sites/farm-crowdy')
 const getThriveAgric = require('./sites/thrive-agric')
+const pjson = require('../package.json')
 
 if (require.main === module) {
     const program = require('commander')
 
     program
-        .version('1.0.0')
+        .version(pjson.version)
         .command('all [env]', 'gets latest info on all', { isDefault: true })
         .command('efarms [env]', 'gets latest info on efarms')
         .command('farm-crowdy [env]', 'gets latest info on farm-crowdy')
