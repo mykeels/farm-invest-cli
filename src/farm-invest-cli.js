@@ -10,10 +10,10 @@ if (require.main === module) {
 
     program
         .version(pjson.version)
-        .command('all [env]', 'gets latest info on all', { isDefault: true })
-        .command('efarms [env]', 'gets latest info on efarms')
-        .command('farm-crowdy [env]', 'gets latest info on farm-crowdy')
-        .command('thrive-agric [env]', 'gets latest info on thrive-agric')
+        .command('all [env]', 'shows latest info on efarms, farm-crowdy abd thrive-agric', { isDefault: true })
+        .command('efarms [env]', 'shows latest info on efarms')
+        .command('farm-crowdy [env]', 'shows latest info on farm-crowdy')
+        .command('thrive-agric [env]', 'shows latest info on thrive-agric')
         .parse(process.argv)
 }
 
