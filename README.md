@@ -1,6 +1,10 @@
 # Farm Invest CLI
 
-A CLI tool built, to detect changes in the products belonging to EFarms, ThriveAgric, and FarmCrowdy.
+A CLI tool built, to detect changes in the products belonging to 
+
+- [EFarms](https://www.efarms.com.ng)
+- [ThriveAgric](https://www.thriveagric.com)
+- [FarmCrowdy](https://www.farmcrowdy.com)
 
 ## Installation
 
