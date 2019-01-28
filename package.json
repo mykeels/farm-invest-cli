@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.2",
-    "commander": "^2.18.0"
+    "commander": "^2.18.0",
+    "line-diff": "^2.0.1"
   },
   "keywords": [
     "FarmCrowdy",
