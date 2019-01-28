@@ -4,7 +4,7 @@ const fs = require('fs')
 const LineDiff = require('line-diff')
 const { printDiff } = require('./utils/print-diff')
 
-const syncThriveAgric = async () => {
+const syncThriveAgric = async ({ getThriveAgric, fs }) => {
     try {
         const productListText = await getThriveAgric()
         if (!fs.existsSync(thriveAgricTxt)) {
@@ -35,7 +35,7 @@ if (require.main === module) {
 
     program.parse(process.argv);
     
-    (async () => syncThriveAgric())()
+    (async () => syncThriveAgric({ getThriveAgric, fs }))()
 }
 
 module.exports = syncThriveAgric

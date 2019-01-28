@@ -1,3 +1,8 @@
+const getEFarms = require('./sites/efarms')
+const getFarmCrowdy = require('./sites/farm-crowdy')
+const getThriveAgric = require('./sites/thrive-agric')
+const fs = require('fs')
+
 const syncAll = async () => {
     try {
         const syncEFarms = require('./farm-invest-cli-efarms')
@@ -5,9 +10,9 @@ const syncAll = async () => {
         const syncThriveAgric = require('./farm-invest-cli-thrive-agric')
 
         return await Promise.all([
-            syncEFarms(),
-            syncFarmCrowdy(),
-            syncThriveAgric()
+            syncEFarms({ getEFarms, fs }),
+            syncFarmCrowdy({ getFarmCrowdy, fs }),
+            syncThriveAgric({ getThriveAgric, fs })
         ])
     }
     catch (ex) {

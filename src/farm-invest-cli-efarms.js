@@ -7,7 +7,7 @@ const { printDiff } = require('./utils/print-diff')
 
 
 
-const syncEFarms = async () => {
+const syncEFarms = async ({ getEFarms, fs }) => {
     try {
         const productListText = await getEFarms()
         if (!fs.existsSync(eFarmsTxt)) {
@@ -39,7 +39,7 @@ if (require.main === module) {
 
     program.parse(process.argv);
 
-    (async () => await syncEFarms())()
+    (async () => await syncEFarms({ getEFarms, fs }))()
 }
 
 module.exports = syncEFarms
