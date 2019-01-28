@@ -5,9 +5,7 @@ const fs = require('fs')
 const LineDiff = require('line-diff')
 const { printDiff } = require('./utils/print-diff')
 
-
-
-const syncEFarms = async ({ getEFarms, fs }) => {
+const syncEFarms = async ({ getEFarms }) => {
     try {
         const productListText = await getEFarms()
         if (!fs.existsSync(eFarmsTxt)) {

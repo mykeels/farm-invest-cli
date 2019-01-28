@@ -4,7 +4,7 @@ const fs = require('fs')
 const LineDiff = require('line-diff')
 const { printDiff } = require('./utils/print-diff')
 
-const syncFarmCrowdy = async ({ getFarmCrowdy, fs }) => {
+const syncFarmCrowdy = async ({ getFarmCrowdy }) => {
     try {
         const productListText = await getFarmCrowdy()
         if (!fs.existsSync(farmCrowdyTxt)) {

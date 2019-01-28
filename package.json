@@ -5,7 +5,7 @@
   "main": "src/farm-invest-cli.js",
   "bin": "./src/farm-invest-cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./tests/"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -21,5 +21,10 @@
     "Investment"
   ],
   "author": "mykeels",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "mock-fs": "^4.7.0"
+  }
 }
