@@ -10,7 +10,6 @@ const { printDiff } = require('./utils/print-diff')
 const syncEFarms = async () => {
     try {
         const productListText = await getEFarms()
-        // const productListText = `Catfish Farmx\nCost Per Farm: ₦ 76,000\ncatfishfarm.php\nROI: 15.5% (6 months)\nLagos-State`
         if (!fs.existsSync(eFarmsTxt)) {
             fs.writeFileSync(eFarmsTxt, productListText)
             console.log(productListText)

@@ -6,11 +6,7 @@ const { printDiff } = require('./utils/print-diff')
 
 const syncFarmCrowdy = async () => {
     try {
-        // const productListText = await getFarmCrowdy()
-        const productListText = `Maize Farm
-₦130,000
-https://www.farmcrowdy.com/farm/maize-farm/
-Returns 8%  per 9 months`
+        const productListText = await getFarmCrowdy()
         if (!fs.existsSync(farmCrowdyTxt)) {
             fs.writeFileSync(farmCrowdyTxt, productListText)
             console.log(productListText)
