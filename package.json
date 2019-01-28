@@ -1,6 +1,6 @@
 {
   "name": "farm-invest-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Are there new investment opportunities on FarmCrowdy, ThriveAgric or EFarms?",
   "main": "src/farm-invest-cli.js",
   "bin": "./src/farm-invest-cli.js",
