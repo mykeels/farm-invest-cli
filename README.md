@@ -1,6 +1,6 @@
 # Farm Invest CLI
 
-A CLI tool built, to detect updates to the products on:
+A CLI tool, built to detect updates to the products on:
 
 - [EFarms](https://www.efarms.com.ng)
 - [ThriveAgric](https://www.thriveagric.com)
