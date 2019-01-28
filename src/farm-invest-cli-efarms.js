@@ -8,7 +8,7 @@ const { printDiff } = require('./utils/print-diff')
 program
     .parse(process.argv);
 
-(async () => {
+const syncEFarms = async () => {
     try {
         const productListText = await getEFarms()
         // const productListText = `Catfish Farmx\nCost Per Farm: ₦ 76,000\ncatfishfarm.php\nROI: 15.5% (6 months)\nLagos-State`
@@ -29,4 +29,10 @@ program
     catch (ex) {
         console.error(ex)
     }
-})()
+}
+
+if (require.main === module) {
+    (async () => await syncEFarms())()
+}
+
+module.exports = syncEFarms

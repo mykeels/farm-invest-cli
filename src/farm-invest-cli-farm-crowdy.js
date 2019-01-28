@@ -8,10 +8,13 @@ const { printDiff } = require('./utils/print-diff')
 program
     .parse(process.argv);
 
-(async () => {
+const syncFarmCrowdy = async () => {
     try {
-        const productListText = await getFarmCrowdy()
-        // const productListText = `Catfish Farmx\nCost Per Farm: ₦ 76,000\ncatfishfarm.php\nROI: 15.5% (6 months)\nLagos-State`
+        // const productListText = await getFarmCrowdy()
+        const productListText = `Maize Farm
+₦130,000
+https://www.farmcrowdy.com/farm/maize-farm/
+Returns 8%  per 9 months`
         if (!fs.existsSync(farmCrowdyTxt)) {
             fs.writeFileSync(farmCrowdyTxt, productListText)
             console.log(productListText)
@@ -29,4 +32,10 @@ program
     catch (ex) {
         console.error(ex)
     }
-})()
+}
+
+if (require.main === module) {
+    (async () => await syncFarmCrowdy())()
+}
+
+module.exports = syncFarmCrowdy
