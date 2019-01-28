@@ -3,6 +3,10 @@
 const getEFarms = require('./sites/efarms')
 const getFarmCrowdy = require('./sites/farm-crowdy')
 const getThriveAgric = require('./sites/thrive-agric')
+const syncAll = require('./farm-invest-cli-all')
+const syncEFarms = require('./farm-invest-cli-efarms')
+const syncFarmCrowdy = require('./farm-invest-cli-farm-crowdy')
+const syncThriveAgric = require('./farm-invest-cli-thrive-agric')
 const pjson = require('../package.json')
 
 if (require.main === module) {
@@ -17,8 +21,10 @@ if (require.main === module) {
         .parse(process.argv)
 }
 
-module.exports = {
-    getEFarms,
-    getFarmCrowdy,
-    getThriveAgric
-}
+module.exports.getEFarms = getEFarms
+module.exports.getFarmCrowdy = getFarmCrowdy
+module.exports.getThriveAgric = getThriveAgric
+module.exports.syncAll = syncAll
+module.exports.syncEFarms = syncEFarms
+module.exports.syncFarmCrowdy = syncFarmCrowdy
+module.exports.syncThriveAgric = syncThriveAgric

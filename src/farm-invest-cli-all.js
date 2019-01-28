@@ -3,7 +3,7 @@ const program = require('commander')
 program
     .parse(process.argv);
 
-(async () => {
+const syncAll = async () => {
     try {
         const syncEFarms = require('./farm-invest-cli-efarms')
         const syncFarmCrowdy = require('./farm-invest-cli-farm-crowdy')
@@ -16,4 +16,10 @@ program
     catch (ex) {
         console.error(ex)
     }
-})()
+}
+
+if (require.main === module) {
+    (async () => await syncAll())()
+}
+
+module.exports = syncAll
