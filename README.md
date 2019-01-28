@@ -47,10 +47,22 @@ Where the green text shows new products, and text is only shown when there is a 
 ## Usage in Node environment
 
 ```js
-const { syncAll } = require('farm-invest-cli')
+const { syncAll, syncEFarms, syncFarmCrowdy, syncThriveAgric } = require('farm-invest-cli')
 
 syncAll().then(diff => {
-    console.log(diff.toString()) // a diff description
+    console.log(diff.toString()) // a product text diff for all sources
+})
+
+syncEFarms().then(diff => {
+    console.log(diff.toString()) // a product text diff for eFarms
+})
+
+syncFarmCrowdy().then(diff => {
+    console.log(diff.toString()) // a product text diff for Farm-Crowdy
+})
+
+syncThriveAgric().then(diff => {
+    console.log(diff.toString()) // a product text diff for Thrive-Agric
 })
 ```
 
