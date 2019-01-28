@@ -1,12 +1,8 @@
 const getFarmCrowdy = require('./sites/farm-crowdy')
-const program = require('commander')
 const { farmCrowdyTxt } = require('./utils/create-files-dir')
 const fs = require('fs')
 const LineDiff = require('line-diff')
 const { printDiff } = require('./utils/print-diff')
-
-program
-    .parse(process.argv);
 
 const syncFarmCrowdy = async () => {
     try {
@@ -36,6 +32,10 @@ Returns 8%  per 9 months`
 }
 
 if (require.main === module) {
+    const program = require('commander')
+
+    program.parse(process.argv);
+    
     (async () => await syncFarmCrowdy())()
 }
 

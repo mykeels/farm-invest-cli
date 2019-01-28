@@ -1,12 +1,8 @@
 const getThriveAgric = require('./sites/thrive-agric')
-const program = require('commander')
 const { thriveAgricTxt } = require('./utils/create-files-dir')
 const fs = require('fs')
 const LineDiff = require('line-diff')
 const { printDiff } = require('./utils/print-diff')
-
-program
-    .parse(process.argv);
 
 const syncThriveAgric = async () => {
     try {
@@ -33,6 +29,10 @@ const syncThriveAgric = async () => {
 }
 
 if (require.main === module) {
+    const program = require('commander')
+
+    program.parse(process.argv);
+    
     (async () => syncThriveAgric())()
 }
 

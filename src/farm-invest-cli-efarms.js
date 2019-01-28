@@ -1,12 +1,11 @@
 const getEFarms = require('./sites/efarms')
-const program = require('commander')
+
 const { eFarmsTxt } = require('./utils/create-files-dir')
 const fs = require('fs')
 const LineDiff = require('line-diff')
 const { printDiff } = require('./utils/print-diff')
 
-program
-    .parse(process.argv);
+
 
 const syncEFarms = async () => {
     try {
@@ -34,6 +33,10 @@ const syncEFarms = async () => {
 }
 
 if (require.main === module) {
+    const program = require('commander')
+
+    program.parse(process.argv);
+
     (async () => await syncEFarms())()
 }
 
