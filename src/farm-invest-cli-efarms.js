@@ -17,6 +17,9 @@ const syncEFarms = async () => {
         }
         else {
             const oldProductListText = fs.readFileSync(eFarmsTxt, 'utf8')
+
+            fs.writeFileSync(eFarmsTxt, productListText)
+            
             if (oldProductListText != productListText) {
                 const diff = new LineDiff(oldProductListText, productListText)
 

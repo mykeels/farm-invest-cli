@@ -14,6 +14,9 @@ const syncThriveAgric = async () => {
         }
         else {
             const oldProductListText = fs.readFileSync(thriveAgricTxt, 'utf8')
+
+            fs.writeFileSync(thriveAgricTxt, productListText)
+            
             if (oldProductListText != productListText) {
                 const diff = new LineDiff(oldProductListText, productListText)
 

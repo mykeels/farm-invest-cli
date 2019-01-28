@@ -17,6 +17,9 @@ Returns 8%  per 9 months`
         }
         else {
             const oldProductListText = fs.readFileSync(farmCrowdyTxt, 'utf8')
+
+            fs.writeFileSync(farmCrowdyTxt, productListText)
+            
             if (oldProductListText != productListText) {
                 const diff = new LineDiff(oldProductListText, productListText)
 
