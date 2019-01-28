@@ -25,9 +25,10 @@ Returns 8%  per 9 months`
                 const diff = new LineDiff(oldProductListText, productListText)
 
                 printDiff(diff.toString())
+                return diff
             }
         }
-        
+        return []
     }
     catch (ex) {
         console.error(ex)

@@ -9,9 +9,11 @@ const syncAll = async () => {
         const syncFarmCrowdy = require('./farm-invest-cli-farm-crowdy')
         const syncThriveAgric = require('./farm-invest-cli-thrive-agric')
 
-        await syncEFarms()
-        await syncFarmCrowdy()
-        await syncThriveAgric()
+        return await Promise.all([
+            syncEFarms(),
+            syncFarmCrowdy(),
+            syncThriveAgric()
+        ])
     }
     catch (ex) {
         console.error(ex)
@@ -21,5 +23,6 @@ const syncAll = async () => {
 if (require.main === module) {
     (async () => await syncAll())()
 }
+
 
 module.exports = syncAll
