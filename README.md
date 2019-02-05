@@ -2,6 +2,7 @@
 
 A CLI tool, built to detect updates to the products on:
 
+- [AgroPartnerships](https://agropartnerships.co)
 - [EFarms](https://www.efarms.com.ng)
 - [ThriveAgric](https://www.thriveagric.com)
 - [FarmCrowdy](https://www.farmcrowdy.com)
@@ -33,6 +34,7 @@ npm link
 
 ```sh
 farm-invest-cli
+farm-invest-cli agro # only agro-partnerships
 farm-invest-cli efarms # only efarms
 farm-invest-cli farm-crowdy # only farm-crowdy
 farm-invest-cli thrive-agric # only thrive-agric
@@ -47,10 +49,14 @@ Where the green text shows new products, and text is only shown when there is a 
 ## Usage in Node environment
 
 ```js
-const { syncAll, syncEFarms, syncFarmCrowdy, syncThriveAgric } = require('farm-invest-cli')
+const { syncAll, syncAgro, syncEFarms, syncFarmCrowdy, syncThriveAgric } = require('farm-invest-cli')
 
 syncAll().then(diff => {
     console.log(diff.toString()) // a product text diff for all sources
+})
+
+syncAgro().then(diff => {
+    console.log(diff.toString()) // a product text diff for Agro-Partnerships
 })
 
 syncEFarms().then(diff => {
@@ -67,7 +73,11 @@ syncThriveAgric().then(diff => {
 ```
 
 ```js
-const { getEFarms, getFarmCrowdy, getThriveAgric } = require('farm-invest-cli')
+const { getAgro, getEFarms, getFarmCrowdy, getThriveAgric } = require('farm-invest-cli')
+
+getAgro().then(productListText => {
+    console.log(productListText) // a textual description of active products on Agro-Partnerships
+})
 
 getEFarms().then(productListText => {
     console.log(productListText) // a textual description of active products on eFarms
