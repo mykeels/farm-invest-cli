@@ -12,7 +12,7 @@
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.18.0",
-    "line-diff": "^2.0.1"
+    "fast-array-diff": "^0.2.0"
   },
   "keywords": [
     "FarmCrowdy",
