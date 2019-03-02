@@ -3,6 +3,7 @@ const { farmCrowdyJson } = require('./utils/create-files-dir')
 const fs = require('fs')
 const diff = require('fast-array-diff')
 const { printDiff } = require('./utils/print-diff')
+const { comparison } = require('./utils/comparison')
 
 const syncFarmCrowdy = async ({ getFarmCrowdy }) => {
     try {
@@ -12,12 +13,12 @@ const syncFarmCrowdy = async ({ getFarmCrowdy }) => {
             console.log(productList)
         }
         else {
-            const oldProductList = fs.readFileSync(farmCrowdyJson, 'utf8')
+            const oldProductList = JSON.parse(fs.readFileSync(farmCrowdyJson, 'utf8'))
 
             fs.writeFileSync(farmCrowdyJson, JSON.stringify(productList, null, 2))
             
-            if (!diff.same(oldProductList, productList)) {
-                const diffObj = diff.diff(oldProductList, productList)
+            if (diff.diff(oldProductList, productList, comparison).removed.length) {
+                const diffObj = diff.diff(oldProductList, productList, comparison)
                 printDiff(diffObj)
                 return diffObj
             }
