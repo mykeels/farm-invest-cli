@@ -1,29 +1,28 @@
 const getFarmCrowdy = require('./sites/farm-crowdy')
-const { farmCrowdyTxt } = require('./utils/create-files-dir')
+const { farmCrowdyJson } = require('./utils/create-files-dir')
 const fs = require('fs')
-const LineDiff = require('line-diff')
+const diff = require('fast-array-diff')
 const { printDiff } = require('./utils/print-diff')
 
 const syncFarmCrowdy = async ({ getFarmCrowdy }) => {
     try {
-        const productListText = await getFarmCrowdy()
-        if (!fs.existsSync(farmCrowdyTxt)) {
-            fs.writeFileSync(farmCrowdyTxt, productListText)
-            console.log(productListText)
+        const productList = await getFarmCrowdy()
+        if (!fs.existsSync(farmCrowdyJson)) {
+            fs.writeFileSync(farmCrowdyJson, JSON.stringify(productList, null, 2))
+            console.log(productList)
         }
         else {
-            const oldProductListText = fs.readFileSync(farmCrowdyTxt, 'utf8')
+            const oldProductList = fs.readFileSync(farmCrowdyJson, 'utf8')
 
-            fs.writeFileSync(farmCrowdyTxt, productListText)
+            fs.writeFileSync(farmCrowdyJson, JSON.stringify(productList, null, 2))
             
-            if (oldProductListText != productListText) {
-                const diff = new LineDiff(oldProductListText, productListText)
-
-                printDiff(diff.toString())
-                return diff
+            if (!diff.same(oldProductList, productList)) {
+                const diffObj = diff.diff(oldProductList, productList)
+                printDiff(diffObj)
+                return diffObj
             }
         }
-        return []
+        return productList
     }
     catch (ex) {
         console.error(ex)
