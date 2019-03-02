@@ -1,31 +1,30 @@
 const getEFarms = require('./sites/efarms')
 
-const { eFarmsTxt } = require('./utils/create-files-dir')
+const { eFarmsJson } = require('./utils/create-files-dir')
 const fs = require('fs')
-const LineDiff = require('line-diff')
+const diff = require('fast-array-diff')
 const { printDiff } = require('./utils/print-diff')
+const { comparison } = require('./utils/comparison')
 
 const syncEFarms = async ({ getEFarms }) => {
     try {
-        const productListText = await getEFarms()
-        if (!fs.existsSync(eFarmsTxt)) {
-            fs.writeFileSync(eFarmsTxt, productListText)
-            console.log(productListText)
+        const productList = await getEFarms()
+        if (!fs.existsSync(eFarmsJson)) {
+            fs.writeFileSync(eFarmsJson, JSON.stringify(productList, null, 2))
+            console.log(productList)
         }
         else {
-            const oldProductListText = fs.readFileSync(eFarmsTxt, 'utf8')
+            const oldProductList = JSON.parse(fs.readFileSync(eFarmsJson, 'utf8'))
 
-            fs.writeFileSync(eFarmsTxt, productListText)
+            fs.writeFileSync(eFarmsJson, JSON.stringify(productList, null, 2))
             
-            if (oldProductListText != productListText) {
-                const diff = new LineDiff(oldProductListText, productListText)
-
-                printDiff(diff.toString())
-
-                return diff
+            if (diff.diff(oldProductList, productList, comparison).removed.length) {
+                const diffObj = diff.diff(oldProductList, productList, comparison)
+                printDiff(diffObj)
+                return diffObj
             }
         }
-        return []
+        return productList
     }
     catch (ex) {
         console.error(ex)

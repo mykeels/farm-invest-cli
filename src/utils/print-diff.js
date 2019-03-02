@@ -1,13 +1,12 @@
 const chalk = require('chalk').default
 
 const printDiff = (diff) => {
-    const lines = diff.split('\n')
-    for(let i = 0; i < lines.length; i++) {
-        const line = lines[i]
-        if (line.startsWith(' -')) console.log(chalk.red(line))
-        else if (line.startsWith(' +')) console.log(chalk.green(line))
-        else console.log(line)
-    }
+    diff.removed.forEach(line => {
+        console.log(chalk.red(JSON.stringify(line, null, 2).replace(/\n/g, '\n-').replace('{', '-{')))
+    })
+    diff.added.forEach(line => {
+        console.log(chalk.green(JSON.stringify(line, null, 2).replace(/\n/g, '\n+').replace('{', '+{')))
+    })
 }
 
 module.exports = printDiff

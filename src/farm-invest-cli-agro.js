@@ -1,31 +1,31 @@
 const getAgro = require('./sites/agro')
 
-const { agroTxt } = require('./utils/create-files-dir')
+const { agroJson } = require('./utils/create-files-dir')
 const fs = require('fs')
-const LineDiff = require('line-diff')
+const diff = require('fast-array-diff')
 const { printDiff } = require('./utils/print-diff')
+const { comparison } = require('./utils/comparison')
 
 const syncAgro = async ({ getAgro }) => {
     try {
-        const productListText = await getAgro()
-        if (!fs.existsSync(agroTxt)) {
-            fs.writeFileSync(agroTxt, productListText)
-            console.log(productListText)
+        const productList = await getAgro()
+
+        if (!fs.existsSync(agroJson)) {
+            fs.writeFileSync(agroJson, JSON.stringify(productList, null, 2))
+            console.log(productList)
         }
         else {
-            const oldProductListText = fs.readFileSync(agroTxt, 'utf8')
+            const oldProductList = JSON.parse(fs.readFileSync(agroJson, 'utf8'))
 
-            fs.writeFileSync(agroTxt, productListText)
-            
-            if (oldProductListText != productListText) {
-                const diff = new LineDiff(oldProductListText, productListText)
+            fs.writeFileSync(agroJson, JSON.stringify(productList, null, 2))
 
-                printDiff(diff.toString())
-
-                return diff
+            if (diff.diff(oldProductList, productList, comparison).removed.length) {
+                const diffObj = diff.diff(oldProductList, productList, comparison)
+                printDiff(diffObj)
+                return diffObj
             }
         }
-        return []
+        return productList
     }
     catch (ex) {
         console.error(ex)
