@@ -52,42 +52,54 @@ Where the green text shows new products, and text is only shown when there is a 
 const { syncAll, syncAgro, syncEFarms, syncFarmCrowdy, syncThriveAgric } = require('farm-invest-cli')
 
 syncAll().then(diff => {
-    console.log(diff.toString()) // a product text diff for all sources
+    console.log(diff) // an array of (array | fast-array-diff) objects for all sources
 })
 
 syncAgro().then(diff => {
-    console.log(diff.toString()) // a product text diff for Agro-Partnerships
+    console.log(diff) // an (array | fast-array-diff) object for Agro-Partnerships
 })
 
 syncEFarms().then(diff => {
-    console.log(diff.toString()) // a product text diff for eFarms
+    console.log(diff) // an (array | fast-array-diff) object for eFarms
 })
 
 syncFarmCrowdy().then(diff => {
-    console.log(diff.toString()) // a product text diff for Farm-Crowdy
+    console.log(diff) // an (array | fast-array-diff) object for Farm-Crowdy
 })
 
 syncThriveAgric().then(diff => {
-    console.log(diff.toString()) // a product text diff for Thrive-Agric
+    console.log(diff) // an (array | fast-array-diff) object for Thrive-Agric
 })
+```
+
+NB: A fast-array-diff object looks like:
+
+```js
+{
+   removed:[
+       { title: 'Foo', link: 'Bar' },
+       { title: 'Bar', link: 'Foo' }
+   ],
+   added: [ { title: 'Baz', link: 'Foo' } ]
+}
 ```
 
 ```js
 const { getAgro, getEFarms, getFarmCrowdy, getThriveAgric } = require('farm-invest-cli')
 
-getAgro().then(productListText => {
-    console.log(productListText) // a textual description of active products on Agro-Partnerships
+getAgro().then(productList => {
+    console.log(productList) // an array of active products on Agro-Partnerships
 })
 
-getEFarms().then(productListText => {
-    console.log(productListText) // a textual description of active products on eFarms
+getEFarms().then(productList => {
+    console.log(productList) // an array of active products on eFarms
 })
 
-getFarmCrowdy().then(productListText => {
-    console.log(productListText) // a textual description of active products on Farm-Crowdy
+getFarmCrowdy().then(productList => {
+    console.log(productList) // an array of active products on Farm-Crowdy
 })
 
-getThriveAgric().then(productListText => {
-    console.log(productListText) // a textual description of active products on Thrive-Agric
+getThriveAgric().then(productList => {
+    console.log(productList) // an array of active products on Thrive-Agric
 })
 ```
