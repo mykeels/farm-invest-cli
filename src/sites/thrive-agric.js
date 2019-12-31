@@ -4,7 +4,7 @@ const fs = require('fs')
 const { thriveAgricHtml } = require('../utils/create-files-dir')
 
 module.exports = function () {
-    return axios.get('https://www.thriveagric.com/shop').then(res => {
+    return axios.get('https://www.thriveagric.com/#our-farms').then(res => {
         const $ = cheerio.load(res.data)
     
         fs.writeFileSync(thriveAgricHtml, res.data)
