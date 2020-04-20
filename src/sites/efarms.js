@@ -39,8 +39,6 @@ module.exports = function() {
       .toArray()
       .filter(({ daysLeft }) => daysLeft && !daysLeft.endsWith('ago'));
 
-    console.table(productList);
-
     return productList;
   });
 };
