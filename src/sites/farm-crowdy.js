@@ -10,7 +10,7 @@ module.exports = function() {
     fs.writeFileSync(farmCrowdyHtml, res.data);
 
     const activeProducts = $('div.row.farmshop.h-100').filter(function() {
-      return $(this).find('span.sold-out').length == 0;
+      return $(this).find('span.sold-out').length === 0;
     });
 
     const productList = activeProducts
