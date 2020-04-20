@@ -1,29 +1,54 @@
-const { default : axios } = require('axios')
-const cheerio = require('cheerio')
-const fs = require('fs')
-const url = require('url')
-const { agroHtml } = require('../utils/create-files-dir')
+const { default: axios } = require('axios');
+const cheerio = require('cheerio');
+const fs = require('fs');
+const url = require('url');
+const { agroHtml } = require('../utils/create-files-dir');
 
-module.exports = function () {
-    return axios.get('https://agropartnerships.co/investments').then(res => {
-        const $ = cheerio.load(res.data)
+module.exports = function() {
+  return axios.get('https://agropartnerships.co/investments').then(res => {
+    const $ = cheerio.load(res.data);
 
-        fs.writeFileSync(agroHtml, res.data)
-        
-        const activeProducts = $('a.farm-block.demo-farm').filter(function () {
-            return $(this).find('h6.light-green-text').length === 0
-        })
+    fs.writeFileSync(agroHtml, res.data);
 
-        const productList = activeProducts.map(function () {
-            const title = $(this).find('h2.white-text').text().trim()
-            const type = $(this).find('h3.white-text').text().trim()
-            const price = $(this).find('h5.white-text').text().trim()
-            const returns = $(this).find('div.preview-yield-block.main-page').text().trim()
-            const link = url.resolve('https://agropartnerships.co', $(this).attr('href').trim())
+    const activeProducts = $('a.farm-block.demo-farm').filter(function() {
+      return $(this).find('h6.light-green-text.no-padding').length === 0;
+    });
 
-            return { title, price, link, returns, type }
-        }).toArray()
+    const productList = activeProducts
+      .map(function() {
+        const title = $(this)
+          .find('h2.white-text')
+          .text()
+          .trim();
+        const type = $(this)
+          .find('h3.white-text')
+          .text()
+          .trim();
+        const price = $(this)
+          .find('h5.white-text')
+          .text()
+          .trim();
+        const returns =
+          $(this)
+            .find('div.preview-yield-block.main-page > div')
+            .text()
+            .trim() +
+          ' ' +
+          $(this)
+            .find('div.preview-yield-block.main-page > h5')
+            .text()
+            .trim();
+        const link = url.resolve(
+          'https://agropartnerships.co',
+          $(this)
+            .attr('href')
+            .trim()
+        );
 
-        return productList
-    })
-}
+        return { title, price, link, returns, type };
+      })
+      .toArray();
+
+    return productList;
+  });
+};
